@@ -1,3 +1,5 @@
+package ru.yandex.javacource.lyubavin.schedule.task;
+
 import java.util.Objects;
 
 public class Task {
@@ -67,7 +69,7 @@ public class Task {
     @Override
     public String toString() {
         return "Task{" +
-                "id=" + id +
+                "taskId=" + id +
                 ", taskName='" + taskName + '\'' +
                 ", taskDiscr='" + taskDiscr + '\'' +
                 ", taskStatus=" + taskStatus +
