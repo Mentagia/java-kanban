@@ -14,6 +14,7 @@ import ru.yandex.javacource.lyubavin.schedule.task.Subtask;
 import ru.yandex.javacource.lyubavin.schedule.task.TaskStatus;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 
@@ -36,7 +37,7 @@ class InMemoryTaskManagerTest {
         assertNotNull(savedTask, "Задача не была добавлена");
         assertEquals(task, savedTask, "Задачи не совпадают");
 
-        ArrayList<Task> taskList = taskManager.getAllTasks();
+        List<Task> taskList = taskManager.getAllTasks();
 
         assertNotNull(taskList, "Задача не была добавлена");
         assertEquals(1, taskList.size(), "Неверное количество задач");
@@ -53,7 +54,7 @@ class InMemoryTaskManagerTest {
         assertNotNull(savedEpic, "Задача не была добавлена");
         assertEquals(epic, savedEpic, "Задачи не совпадают");
 
-        ArrayList<Epic> epicList = taskManager.getAllEpics();
+        List<Epic> epicList = taskManager.getAllEpics();
 
         assertNotNull(epicList, "Задача не была добавлена");
         assertEquals(1, epicList.size(), "Неверное количество задач");
@@ -74,7 +75,7 @@ class InMemoryTaskManagerTest {
         assertNotNull(savedSubtask, "Задача не была добавлена");
         assertEquals(subtask, savedSubtask, "Задачи не совпадают");
 
-        ArrayList<Subtask> subtaskList = taskManager.getAllSubtasks();
+        List<Subtask> subtaskList = taskManager.getAllSubtasks();
 
         assertNotNull(subtaskList, "Задача не была добавлена");
         assertEquals(1, subtaskList.size(), "Неверное количество задач");
@@ -99,14 +100,14 @@ class InMemoryTaskManagerTest {
         int subtaskId3 = taskManager.addSubtask(subtask3);
         int subtaskId4 = taskManager.addSubtask(subtask4);
 
-        ArrayList<Subtask> epic1Subtasks = taskManager.getAllEpicSubtasks(epicId1);
+        List<Subtask> epic1Subtasks = taskManager.getAllEpicSubtasks(epicId1);
 
         assertNotNull(epic1Subtasks, "Задачи не были добавлены");
         assertEquals(2, epic1Subtasks.size(), "Неверное количество задач");
         assertEquals(subtask1, epic1Subtasks.get(0), "Задачи не совпадают");
         assertEquals(subtask2, epic1Subtasks.get(1), "Задачи не совпадают");
 
-        ArrayList<Subtask> epic2Subtasks = taskManager.getAllEpicSubtasks(epicId2);
+        List<Subtask> epic2Subtasks = taskManager.getAllEpicSubtasks(epicId2);
 
         assertNotNull(epic2Subtasks, "Задачи не были добавлены");
         assertEquals(2, epic2Subtasks.size(), "Неверное количество задач");
@@ -137,7 +138,7 @@ class InMemoryTaskManagerTest {
         assertNotNull(savedUpdatedTask, "Задача не была добавлена");
         assertEquals(updatedTask, savedUpdatedTask, "Задачи не совпадают");
 
-        ArrayList<Task> taskList = taskManager.getAllTasks();
+        List<Task> taskList = taskManager.getAllTasks();
 
         assertNotNull(taskList, "Задача не была добавлена");
         assertEquals(1, taskList.size(), "Неверное количество задач");
@@ -157,7 +158,7 @@ class InMemoryTaskManagerTest {
         assertNotNull(savedUpdatedEpic, "Задача не была добавлена");
         assertEquals(updatedEpic, savedUpdatedEpic, "Задачи не совпадают");
 
-        ArrayList<Epic> epicList = taskManager.getAllEpics();
+        List<Epic> epicList = taskManager.getAllEpics();
 
         assertNotNull(epicList, "Задача не была добавлена");
         assertEquals(1, epicList.size(), "Неверное количество задач");
@@ -184,7 +185,7 @@ class InMemoryTaskManagerTest {
         assertNotNull(savedUpdatedSubtask, "Задача не была добавлена");
         assertEquals(updatedSubtask, savedUpdatedSubtask, "Задачи не совпадают");
 
-        ArrayList<Subtask> subtaskList = taskManager.getAllSubtasks();
+        List<Subtask> subtaskList = taskManager.getAllSubtasks();
 
         assertNotNull(subtaskList, "Задача не была добавлена");
         assertEquals(1, subtaskList.size(), "Неверное количество задач");

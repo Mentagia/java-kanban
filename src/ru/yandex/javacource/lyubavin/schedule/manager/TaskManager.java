@@ -4,7 +4,7 @@ import ru.yandex.javacource.lyubavin.schedule.task.Epic;
 import ru.yandex.javacource.lyubavin.schedule.task.Subtask;
 import ru.yandex.javacource.lyubavin.schedule.task.Task;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface TaskManager {
     int addTask(Task task);
@@ -13,7 +13,7 @@ public interface TaskManager {
 
     Task getTask(int taskId);
 
-    ArrayList<Task> getAllTasks();
+    List<Task> getAllTasks();
 
     void removeAllTasks();
 
@@ -25,7 +25,7 @@ public interface TaskManager {
 
     Epic getEpic(int epicId);
 
-    ArrayList<Epic> getAllEpics();
+    List<Epic> getAllEpics();
 
     void removeAllEpics();
 
@@ -37,13 +37,13 @@ public interface TaskManager {
 
     Subtask getSubtask(int subtaskId);
 
-    ArrayList<Subtask> getAllSubtasks();
+    List<Subtask> getAllSubtasks();
 
-    ArrayList<Subtask> getAllEpicSubtasks(int epicId);
+    List<Subtask> getAllEpicSubtasks(int epicId);
 
     void removeAllSubtask();
 
     void removeSubtask(int id);
 
-    HistoryManager getHistoryManager();
+    List<Task> getHistoryList();
 }

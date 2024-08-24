@@ -29,9 +29,9 @@ public class Main {
         int idEpic1 = taskManager.addEpic(newEpic1);
 
         Subtask newSubtask1 = new Subtask("Обучиться JavaCore",
-                "Изучить JavaCore за 6 месяцев", TaskStatus.NEW, 2);
+                "Изучить JavaCore за 6 месяцев", TaskStatus.NEW, idEpic1);
         Subtask newSubtask2 = new Subtask("Обучиться SpringBoot",
-                "Изучить SpringBoot за 6 месяцев", TaskStatus.NEW, 2);
+                "Изучить SpringBoot за 6 месяцев", TaskStatus.NEW, idEpic1);
 
         int idSubtask1 = taskManager.addSubtask(newSubtask1);
         int idSubtask2 =  taskManager.addSubtask(newSubtask2);
@@ -42,7 +42,7 @@ public class Main {
         int idEpic2 = taskManager.addEpic(newEpic2);
 
         Subtask newSubtask3 = new Subtask("Обучиться SQL, Hibernate, Docker",
-                "Изучить SQL, Hibernate, Docker за 3 месяца", TaskStatus.NEW, 5);
+                "Изучить SQL, Hibernate, Docker за 3 месяца", TaskStatus.NEW, idEpic2);
 
         int idSubtask3 = taskManager.addSubtask(newSubtask3);
 
@@ -54,9 +54,26 @@ public class Main {
                 "Проходить по 10000 шагов в день на протяжении недели", TaskStatus.IN_PROGRESS);
         taskManager.updateTask(updatedTask);*/
 
-        Subtask updatedSubtask2 = new Subtask(4, "Обучиться SpringBoot",
-                "Изучить SpringBoot за 6 месяцев", TaskStatus.IN_PROGRESS, 2);
+        System.out.println("-".repeat(15));
+        System.out.println("Эпики:");
+        for (Task epic : taskManager.getAllEpics()) {
+            System.out.println(epic);
+
+            for (Task task : taskManager.getAllEpicSubtasks(epic.getId())) {
+                System.out.println("--> " + task);
+            }
+        }
+        System.out.println("-".repeat(15));
+
+        Subtask updatedSubtask2 = new Subtask(idSubtask2, "Обучиться SpringBoot",
+                "Изучить SpringBoot за 6 месяцев", TaskStatus.IN_PROGRESS, idEpic1);
         taskManager.updateSubtask(updatedSubtask2);
+
+        Epic updatedEpic1 = new Epic(idEpic1, "Полностью обучиться Java",
+                "Обучиться Java на достаточном для трудоустройства уровне за последующий год");
+        taskManager.updateEpic(updatedEpic1);
+
+
 /*
         System.out.println("-".repeat(15));
         System.out.println("Список task-ов: " + taskManager.getAllTasks());
@@ -80,7 +97,7 @@ public class Main {
             System.out.println(subtask);
         }
 
-
+        System.out.println("-".repeat(15));
         System.out.println(taskManager.getTask(1));
         System.out.println(taskManager.getEpic(2));
         System.out.println(taskManager.getTask(1));
@@ -91,16 +108,18 @@ public class Main {
         System.out.println(taskManager.getSubtask(6));
         System.out.println(taskManager.getSubtask(3));
         System.out.println(taskManager.getSubtask(4));
+        System.out.println("-".repeat(15));
 
         System.out.println("История:");
-        for (Task task : taskManager.getHistoryManager().getHistory()) {
+        for (Task task : taskManager.getHistoryList()) {
             System.out.println(task);
         }
 
-        System.out.println(taskManager.getSubtask(6));
+        System.out.println("-".repeat(15));
+        taskManager.getSubtask(6);
 
         System.out.println("История:");
-        for (Task task : taskManager.getHistoryManager().getHistory()) {
+        for (Task task : taskManager.getHistoryList()) {
             System.out.println(task);
         }
     }

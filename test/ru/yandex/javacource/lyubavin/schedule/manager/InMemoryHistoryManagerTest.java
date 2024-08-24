@@ -2,16 +2,15 @@ package ru.yandex.javacource.lyubavin.schedule.manager;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import ru.yandex.javacource.lyubavin.schedule.task.Task;
 import ru.yandex.javacource.lyubavin.schedule.task.Epic;
 import ru.yandex.javacource.lyubavin.schedule.task.Subtask;
 import ru.yandex.javacource.lyubavin.schedule.task.TaskStatus;
 
-import java.util.ArrayList;
+import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.*;
 
 
 class InMemoryHistoryManagerTest {
@@ -21,21 +20,26 @@ class InMemoryHistoryManagerTest {
     @BeforeEach
     void beforeEach() {
         taskManager = Managers.getDefault();
-        historyManager = taskManager.getHistoryManager();
+        historyManager = Managers.getDefaultHistory();
     }
 
     @Test
     void assureSavePreviousVersionOfTask() {
-
         Task task = new Task(1, "task", "task description", TaskStatus.NEW);
 
         historyManager.addTaskToHistory(task);
 
-        assertEquals(1, task.getId(), "Добавлена неверная задача");
+        assertEquals(task, historyManager.getHistory().get(0), "Добавлена неверная задача");
 
-        task.setId(2);
+        Task updatedTask = new Task(1, "updated Task",
+                "updated Task description", TaskStatus.IN_PROGRESS);
+        taskManager.updateTask(updatedTask);
 
-        assertEquals(1, historyManager.getHistory().get(0).getId(),
+        assertNotEquals(updatedTask.getTaskName(), historyManager.getHistory().get(0).getTaskName(),
+                "Сохранена новая версия задачи");
+        assertNotEquals(updatedTask.getTaskDiscr(), historyManager.getHistory().get(0).getTaskDiscr(),
+                "Сохранена новая версия задачи");
+        assertNotEquals(updatedTask.getTaskStatus(), historyManager.getHistory().get(0).getTaskStatus(),
                 "Сохранена новая версия задачи");
     }
 
@@ -61,7 +65,7 @@ class InMemoryHistoryManagerTest {
         historyManager.addTaskToHistory(subtask2);
         historyManager.addTaskToHistory(subtask3);
 
-        ArrayList<Task> history = historyManager.getHistory();
+        List<Task> history = historyManager.getHistory();
 
         assertNotNull(history, "Задачи не добавлены в историю");
         assertEquals(7, history.size(), "Не все задачи добавлены в историю");
@@ -78,7 +82,7 @@ class InMemoryHistoryManagerTest {
             historyManager.addTaskToHistory(task);
         }
 
-        final ArrayList<Task> history = historyManager.getHistory();
+        final List<Task> history = historyManager.getHistory();
 
         assertNotNull(history, "Задачи не добавлены в историю");
         assertEquals(10, history.size(),"Не все задачи добавлены в историю");
