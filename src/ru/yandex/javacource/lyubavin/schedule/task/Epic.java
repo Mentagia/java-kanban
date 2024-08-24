@@ -1,7 +1,6 @@
 package ru.yandex.javacource.lyubavin.schedule.task;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Epic extends Task{
     private ArrayList<Integer> subtaskIds;
