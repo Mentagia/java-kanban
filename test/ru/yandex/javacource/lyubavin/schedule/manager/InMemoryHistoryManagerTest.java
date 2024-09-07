@@ -85,7 +85,7 @@ class InMemoryHistoryManagerTest {
     }
 
     @Test
-    void assureAddSameTaskOneTimeAndOnlyTheLatestVersionToHistory () {
+    void assureAddSameTaskOneTimeAndOnlyTheLatestVersionToHistory() {
         Task task1 = new Task(1,"task 1", "task description 1", TaskStatus .NEW);
         Task task2 = new Task(2,"task 2", "task  description 2", TaskStatus .NEW);
 

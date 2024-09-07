@@ -11,7 +11,7 @@ import java.util.ArrayList;
 class EpicTest {
 
     @Test
-    void assureEpicObjectsAreEqualIfIdEqual(){
+    void assureEpicObjectsAreEqualIfIdEqual() {
         Epic epic1 = new Epic(1, "Test epic1",
                 "Test NewTask1 description");
         Epic epic2 = new Epic(1, "Test epic2",

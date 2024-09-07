@@ -7,8 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-
-
 import ru.yandex.javacource.lyubavin.schedule.task.Task;
 import ru.yandex.javacource.lyubavin.schedule.task.Epic;
 import ru.yandex.javacource.lyubavin.schedule.task.Subtask;
@@ -17,8 +15,6 @@ import ru.yandex.javacource.lyubavin.schedule.task.TaskStatus;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-
 
 class InMemoryTaskManagerTest {
 
@@ -390,7 +386,6 @@ class InMemoryTaskManagerTest {
         assertNotEquals(epic1.getId(),epic2.getId(), "Id эпиков не отличается");
     }
 
-
     @Test
     public void assureSubtasksWithGeneratedAndAssignedIdsDoNotConflict() {
         Epic epic1 = new Epic("Test epic1",
@@ -423,7 +418,7 @@ class InMemoryTaskManagerTest {
     }
 
     @Test
-    void assureChangesInEveryFieldOfTaskByUsingSetter () {
+    void assureChangesInEveryFieldOfTaskByUsingSetter() {
         Task task1 = new Task("task 1", "task description 1", TaskStatus .NEW);
         int taskId = taskManager.addTask(task1);
 
@@ -439,7 +434,7 @@ class InMemoryTaskManagerTest {
     }
 
     @Test
-    void assureChangesInEveryFieldOfEpicByUsingSetter () {
+    void assureChangesInEveryFieldOfEpicByUsingSetter() {
         Epic epic1 = new Epic(1, "Test epic1",
                 "Test NewTask1 description");
 
@@ -514,5 +509,4 @@ class InMemoryTaskManagerTest {
 
         assertEquals(checkList, epic1.getSubtaskIds(), "ID не совпадают.");
     }
-
 }

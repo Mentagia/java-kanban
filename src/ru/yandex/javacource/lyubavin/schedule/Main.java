@@ -1,6 +1,5 @@
 package ru.yandex.javacource.lyubavin.schedule;
 
-import ru.yandex.javacource.lyubavin.schedule.manager.HistoryManager;
 import ru.yandex.javacource.lyubavin.schedule.manager.TaskManager;
 import ru.yandex.javacource.lyubavin.schedule.manager.Managers;
 import ru.yandex.javacource.lyubavin.schedule.task.Epic;
