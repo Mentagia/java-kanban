@@ -9,8 +9,7 @@ import java.util.ArrayList;
 
 
 class EpicTest {
-    //проверьте, что объект Epic нельзя добавить в самого себя в виде подзадачи;
-    //Не представляется возможным добавить Epic в качестве Subtask, т.к. Subtask принимает только Subtask :(
+
     @Test
     void assureEpicObjectsAreEqualIfIdEqual(){
         Epic epic1 = new Epic(1, "Test epic1",

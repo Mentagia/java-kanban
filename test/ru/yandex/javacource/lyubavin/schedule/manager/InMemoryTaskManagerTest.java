@@ -3,6 +3,7 @@ package ru.yandex.javacource.lyubavin.schedule.manager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
@@ -14,6 +15,7 @@ import ru.yandex.javacource.lyubavin.schedule.task.Subtask;
 import ru.yandex.javacource.lyubavin.schedule.task.TaskStatus;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -361,4 +363,156 @@ class InMemoryTaskManagerTest {
         taskManager.removeAllSubtask();
         assertEquals(new ArrayList<>(), epic1.getSubtaskIds(),"Подзадачи не были удалены");
     }
+
+    @Test
+    public void assureTasksWithGeneratedAndAssignedIdsDoNotConflict() {
+        Task task1 = new Task(1, "task 1", "task description 1", TaskStatus .NEW);
+        Task task2 = new Task("task 2", "task description 2", TaskStatus .NEW);
+
+        taskManager.addTask(task1);
+        taskManager.addTask(task2);
+
+        assertNotEquals(task1.getId(),task2.getId(), "Id задач не отличается");
+    }
+
+
+    @Test
+    public void assureEpicsWithGeneratedAndAssignedIdsDoNotConflict() {
+        Epic epic1 = new Epic(1, "Test epic1",
+                "Test epic1 description");
+        Epic epic2 = new Epic("Test epic2",
+                "Test epic2 description");
+
+
+        taskManager.addEpic(epic1);
+        taskManager.addEpic(epic2);
+
+        assertNotEquals(epic1.getId(),epic2.getId(), "Id эпиков не отличается");
+    }
+
+
+    @Test
+    public void assureSubtasksWithGeneratedAndAssignedIdsDoNotConflict() {
+        Epic epic1 = new Epic("Test epic1",
+                "Test epic1 description");
+        int epicId =  taskManager.addEpic(epic1);
+
+        Subtask sub1 = new Subtask(1, "Test sub1",
+                "Test NewTask1 description", TaskStatus.NEW, epicId);
+        Subtask sub2 = new Subtask( "Test sub2",
+                "Test NewTask2 description", TaskStatus.NEW, epicId);
+
+        taskManager.addSubtask(sub1);
+        taskManager.addSubtask(sub1);
+
+        assertNotEquals(sub1.getId(), sub2.getId(), "Id подзадач не отличается");
+    }
+
+    @Test
+    void assureDeletedSubtasksShouldNotKeepOldId() {
+        Epic epic1 = new Epic("Test epic1", "Test epic1 description");
+        int epicId = taskManager.addEpic(epic1);
+        Subtask subtask = new Subtask ("Test sub1",
+                "Test NewTask1 description",TaskStatus.NEW, epicId);
+        int subtaskId = taskManager.addSubtask(subtask);
+
+        taskManager.removeSubtask(subtaskId);
+        Subtask deletedSubtask = taskManager.getSubtask(subtaskId);
+
+        assertNull(deletedSubtask, "Удаленная подзадача сохранила свой ID");
+    }
+
+    @Test
+    void assureChangesInEveryFieldOfTaskByUsingSetter () {
+        Task task1 = new Task("task 1", "task description 1", TaskStatus .NEW);
+        int taskId = taskManager.addTask(task1);
+
+        task1.setTaskName("New name");
+        task1.setTaskDiscr("New description");
+        task1.setTaskStatus(TaskStatus.DONE);
+
+        Task updatedTask = taskManager.getTask(taskId);
+
+        assertEquals("New name", updatedTask.getTaskName());
+        assertEquals("New description", updatedTask.getTaskDiscr());
+        assertEquals(TaskStatus.DONE, updatedTask.getTaskStatus());
+    }
+
+    @Test
+    void assureChangesInEveryFieldOfEpicByUsingSetter () {
+        Epic epic1 = new Epic(1, "Test epic1",
+                "Test NewTask1 description");
+
+        int epicId1 = taskManager.addEpic(epic1);
+
+        Subtask sub1 = new Subtask(2, "Test sub1",
+                "Test NewTask1 description", TaskStatus.NEW, epicId1);
+        Subtask sub2 = new Subtask(3, "Test sub2",
+                "Test NewTask2 description", TaskStatus.NEW, epicId1);
+
+        int subtaskId1 = taskManager.addSubtask(sub1);
+        int subtaskId2 = taskManager.addSubtask(sub2);
+
+        epic1.setTaskName("New name");
+        epic1.setTaskDiscr("New description");
+        Epic updatedEpic = taskManager.getEpic(epicId1);
+
+        assertEquals("New name", updatedEpic.getTaskName());
+        assertEquals("New description", updatedEpic.getTaskDiscr());
+        assertEquals(2, updatedEpic.getSubtaskIds().size());
+        assertEquals(Arrays.asList(sub1.getId(),sub2.getId()), updatedEpic.getSubtaskIds());
+    }
+
+    @Test
+    void assureChangesInEveryFieldOfSubtaskByUsingSetter() {
+        Epic epic = new Epic ("Test epic1",
+                "Test NewTask1 description");
+
+        int epicId = taskManager.addEpic(epic);
+
+        Subtask sub1 = new Subtask("Test sub1", " Test sub1 description", TaskStatus.NEW, epicId);
+
+        int subtaskId = taskManager.addSubtask(sub1);
+
+        sub1.setTaskName("New name");
+        sub1.setTaskDiscr("New description");
+        sub1.setTaskStatus(TaskStatus.DONE);
+
+        Subtask updatedSubtask = taskManager.getSubtask(subtaskId);
+
+        assertEquals("New name", updatedSubtask.getTaskName());
+        assertEquals("New description", updatedSubtask.getTaskDiscr());
+        assertEquals(TaskStatus.DONE, updatedSubtask.getTaskStatus());
+    }
+
+    @Test
+    void assureRemoveSubtaskIds() {
+        Epic epic1 = new Epic(1, "Test epic1",
+                "Test epic1 description");
+        int epicId1 = taskManager.addEpic(epic1);
+
+        Subtask sub1 = new Subtask(2, "Test sub1",
+                "Test sub1 description", TaskStatus.NEW, epicId1);
+        Subtask sub2 = new Subtask(3, "Test sub2",
+                "Test sub2 description", TaskStatus.NEW, epicId1);
+
+        int subtaskId1 = taskManager.addSubtask(sub1);
+
+        assertNotNull(epic1.getSubtaskIds(),"ID не добавлен.");
+
+        int subtaskId2 = taskManager.addSubtask(sub2);
+
+        ArrayList<Integer> checkList = new ArrayList<>();
+
+        checkList.add(1);
+        checkList.add(2);
+
+        assertEquals(checkList, epic1.getSubtaskIds(), "ID не совпадают.");
+
+        checkList.remove(Integer.valueOf(2));
+        epic1.removeSubtaskId(subtaskId2);
+
+        assertEquals(checkList, epic1.getSubtaskIds(), "ID не совпадают.");
+    }
+
 }
