@@ -1,6 +1,6 @@
 package ru.yandex.javacource.lyubavin.schedule.task;
 
-public class Subtask extends Task{
+public class Subtask extends Task {
     private int epicId;
 
     public Subtask(String taskName, String taskDiscr, TaskStatus taskStatus, int epicId) {
