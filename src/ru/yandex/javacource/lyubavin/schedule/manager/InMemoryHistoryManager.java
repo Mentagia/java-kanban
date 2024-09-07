@@ -31,8 +31,7 @@ public class InMemoryHistoryManager implements HistoryManager {
 
         if (oldTail == null) {
             head = tail;
-        }
-        else {
+        } else {
             oldTail.next = tail;
         }
         return tail;
