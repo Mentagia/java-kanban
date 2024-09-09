@@ -27,7 +27,7 @@ class InMemoryHistoryManagerTest {
     void assureSavePreviousVersionOfTask() {
         Task task = new Task(1, "task", "task description", TaskStatus.NEW);
 
-        historyManager.addTaskToHistory(task);
+        historyManager.add(task);
 
         assertEquals(task, historyManager.getHistory().get(0), "Добавлена неверная задача");
 
@@ -57,13 +57,13 @@ class InMemoryHistoryManagerTest {
         Subtask subtask3 = new Subtask(7,"subtask 3",
                 "subtask description 3", TaskStatus .NEW,4);
 
-        historyManager.addTaskToHistory(task1);
-        historyManager.addTaskToHistory(task2);
-        historyManager.addTaskToHistory(epic1);
-        historyManager.addTaskToHistory(epic2);
-        historyManager.addTaskToHistory(subtask1);
-        historyManager.addTaskToHistory(subtask2);
-        historyManager.addTaskToHistory(subtask3);
+        historyManager.add(task1);
+        historyManager.add(task2);
+        historyManager.add(epic1);
+        historyManager.add(epic2);
+        historyManager.add(subtask1);
+        historyManager.add(subtask2);
+        historyManager.add(subtask3);
 
         List<Task> history = historyManager.getHistory();
 
@@ -76,8 +76,8 @@ class InMemoryHistoryManagerTest {
         Task task1 = new Task(1,"task 1", "task description 1", TaskStatus .NEW);
         Task task2 = new Task(2,"task 2", "task  description 2", TaskStatus .NEW);
 
-        historyManager.addTaskToHistory(task1);
-        historyManager.addTaskToHistory(task2);
+        historyManager.add(task1);
+        historyManager.add(task2);
 
         final List<Task> history = historyManager.getHistory();
 
@@ -90,9 +90,9 @@ class InMemoryHistoryManagerTest {
         Task task2 = new Task(2,"task 2", "task  description 2", TaskStatus .NEW);
 
 
-        historyManager.addTaskToHistory(task1);
-        historyManager.addTaskToHistory(task2);
-        historyManager.addTaskToHistory(task1);
+        historyManager.add(task1);
+        historyManager.add(task2);
+        historyManager.add(task1);
 
         final List<Task> history = historyManager.getHistory();
 

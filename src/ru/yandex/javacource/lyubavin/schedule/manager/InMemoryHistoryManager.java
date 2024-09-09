@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.HashMap;
 
 public class InMemoryHistoryManager implements HistoryManager {
-    private final Map<Integer, Node<Task>> historyMap = new HashMap<>();
+    private final Map<Integer, Node<Task>> history = new HashMap<>();
 
     public static class Node<T> {
         public T data;
@@ -75,20 +75,26 @@ public class InMemoryHistoryManager implements HistoryManager {
     }
 
     @Override
-    public void addTaskToHistory(Task task) {
+    public void add(Task task) {
+        if (task == null) {
+            return;
+        }
 
         final int taskId = task.getId();
 
         remove(taskId);
-        historyMap.put(taskId, linkLast(task));
+        history.put(taskId, linkLast(task));
     }
 
     @Override
     public void remove(int id) {
-        if (historyMap.containsKey(id)) {
-            removeNode(historyMap.get(id));
-            historyMap.remove(id);
+        final Node<Task> node = history.remove(id);
+
+        if (node == null) {
+            return;
         }
+
+        removeNode(node);
     }
 
     @Override
