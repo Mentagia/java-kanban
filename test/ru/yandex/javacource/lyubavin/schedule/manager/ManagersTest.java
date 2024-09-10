@@ -9,12 +9,14 @@ class ManagersTest {
     @Test
     void testGetDefault() {
         TaskManager taskManager = Managers.getDefault();
+
         assertNotNull(taskManager, "Объект не инициализирован");
     }
 
     @Test
     void testGetDefaultHistory() {
         HistoryManager historyManager = Managers.getDefaultHistory();
+
         assertNotNull(historyManager, "Объект не инициализирован");
     }
 }

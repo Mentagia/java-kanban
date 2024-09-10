@@ -2,7 +2,7 @@ package ru.yandex.javacource.lyubavin.schedule.task;
 
 import java.util.ArrayList;
 
-public class Epic extends Task{
+public class Epic extends Task {
     private ArrayList<Integer> subtaskIds;
 
     public Epic(String epicName, String epicDiscr) {

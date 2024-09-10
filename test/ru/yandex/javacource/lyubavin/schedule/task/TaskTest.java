@@ -6,16 +6,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TaskTest {
     @Test
-    void assureTaskObjectsAreEqualIfIdEqual(){
+    void assureTaskObjectsAreEqualIfIdEqual() {
         Task task1 = new Task(1, "Test NewTask1",
                 "Test NewTask1 description", TaskStatus.NEW);
         Task task2 = new Task(1, "Test NewTask2",
                 "Test NewTask2 description", TaskStatus.NEW);
+
         assertEquals(task1, task2, "Задачи не совпадают.");
     }
 
     @Test
-    void assureSetNewId(){
+    void assureSetNewId() {
         Task task = new Task(1, "Test NewTask1",
                 "Test NewTask description", TaskStatus.NEW);
 
@@ -25,7 +26,7 @@ class TaskTest {
     }
 
     @Test
-    void assureSetNewName(){
+    void assureSetNewName() {
         Task task = new Task(1, "Test NewTask1",
                 "Test NewTask description", TaskStatus.NEW);
 
@@ -35,7 +36,7 @@ class TaskTest {
     }
 
     @Test
-    void assureSetNewDescription(){
+    void assureSetNewDescription() {
         Task task = new Task(1, "Test NewTask1",
                 "Test NewTask description", TaskStatus.NEW);
 
@@ -45,7 +46,7 @@ class TaskTest {
     }
 
     @Test
-    void assureSetNewStatus(){
+    void assureSetNewStatus() {
         Task task = new Task(1, "Test NewTask1",
                 "Test NewTask description", TaskStatus.NEW);
 
