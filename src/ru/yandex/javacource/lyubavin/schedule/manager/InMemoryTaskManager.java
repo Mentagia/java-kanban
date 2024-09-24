@@ -3,7 +3,7 @@ package ru.yandex.javacource.lyubavin.schedule.manager;
 import ru.yandex.javacource.lyubavin.schedule.task.Epic;
 import ru.yandex.javacource.lyubavin.schedule.task.Subtask;
 import ru.yandex.javacource.lyubavin.schedule.task.Task;
-import ru.yandex.javacource.lyubavin.schedule.task.TaskStatus;
+import ru.yandex.javacource.lyubavin.schedule.enums.TaskStatus;
 
 import java.util.HashMap;
 import java.util.List;
@@ -12,9 +12,9 @@ import java.util.ArrayList;
 
 public class InMemoryTaskManager implements TaskManager {
     private int generatedId = 0;
-    private final Map<Integer, Task> tasks = new HashMap<>();
-    private final Map<Integer, Subtask> subtasks = new HashMap<>();
-    private final Map<Integer, Epic> epics = new HashMap<>();
+    final Map<Integer, Task> tasks = new HashMap<>();
+    final Map<Integer, Subtask> subtasks = new HashMap<>();
+    final Map<Integer, Epic> epics = new HashMap<>();
     private final HistoryManager historyManager = new InMemoryHistoryManager();
 
     @Override
@@ -257,7 +257,7 @@ public class InMemoryTaskManager implements TaskManager {
         changeEpicStatus(epicId);
     }
 
-    private void changeEpicStatus(int epicId) {
+    void changeEpicStatus(int epicId) {
         Epic epicToChangeStatus = epics.get(epicId);
         List<Integer> subtaskIdS = epicToChangeStatus.getSubtaskIds();
         int amountOfDoneSubtusks = 0;

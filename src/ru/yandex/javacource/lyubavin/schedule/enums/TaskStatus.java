@@ -1,4 +1,4 @@
-package ru.yandex.javacource.lyubavin.schedule.task;
+package ru.yandex.javacource.lyubavin.schedule.enums;
 
 public enum TaskStatus {
     NEW,

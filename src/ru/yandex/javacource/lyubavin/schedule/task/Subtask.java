@@ -1,5 +1,8 @@
 package ru.yandex.javacource.lyubavin.schedule.task;
 
+import ru.yandex.javacource.lyubavin.schedule.enums.TaskStatus;
+import ru.yandex.javacource.lyubavin.schedule.enums.TaskType;
+
 public class Subtask extends Task {
     private int epicId;
 
@@ -22,13 +25,13 @@ public class Subtask extends Task {
     }
 
     @Override
+    public TaskType getType() {
+        return TaskType.SUBTASK;
+    }
+
+    @Override
     public String toString() {
-        return "Subtask{" +
-                "subtaskId=" + getId() +
-                ", subtaskName='" + getTaskName() + '\'' +
-                ", subtaskDiscr='" + getTaskDiscr() + '\'' +
-                ", subtaskStatus=" + getTaskStatus() +
-                ", epicId=" + epicId +
-                '}';
+        return String.format("%d,%s,%s,%s,%s,%s\n",(getId()), getType(), getTaskName(),
+                getTaskStatus(), getTaskDiscr(), getEpicId());
     }
 }

@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import ru.yandex.javacource.lyubavin.schedule.task.Task;
 import ru.yandex.javacource.lyubavin.schedule.task.Epic;
 import ru.yandex.javacource.lyubavin.schedule.task.Subtask;
-import ru.yandex.javacource.lyubavin.schedule.task.TaskStatus;
+import ru.yandex.javacource.lyubavin.schedule.enums.TaskStatus;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -65,7 +65,8 @@ class InMemoryTaskManagerTest {
 
         int epicId = taskManager.addEpic(epic);
 
-        Subtask subtask = new Subtask("subtask ", " subtask  description ", TaskStatus.NEW, epicId);
+        Subtask subtask = new Subtask("subtask ",
+                " subtask  description ", TaskStatus.NEW, epicId);
 
         int subtaskId = taskManager.addSubtask(subtask);
         Task savedSubtask = taskManager.getSubtask(subtaskId);
@@ -88,10 +89,14 @@ class InMemoryTaskManagerTest {
         int epicId1 = taskManager.addEpic(epic1);
         int epicId2 = taskManager.addEpic(epic2);
 
-        Subtask subtask1 = new Subtask("subtask 1", " subtask 1 description ", TaskStatus.NEW, epicId1);
-        Subtask subtask2 = new Subtask("subtask 2", " subtask 2 description ", TaskStatus.NEW, epicId1);
-        Subtask subtask3 = new Subtask("subtask 3", " subtask 3 description ", TaskStatus.NEW, epicId2);
-        Subtask subtask4 = new Subtask("subtask 4", " subtask 4 description ", TaskStatus.NEW, epicId2);
+        Subtask subtask1 = new Subtask("subtask 1",
+                " subtask 1 description ", TaskStatus.NEW, epicId1);
+        Subtask subtask2 = new Subtask("subtask 2",
+                " subtask 2 description ", TaskStatus.NEW, epicId1);
+        Subtask subtask3 = new Subtask("subtask 3",
+                " subtask 3 description ", TaskStatus.NEW, epicId2);
+        Subtask subtask4 = new Subtask("subtask 4",
+                " subtask 4 description ", TaskStatus.NEW, epicId2);
 
         int subtaskId1 = taskManager.addSubtask(subtask1);
         int subtaskId2 = taskManager.addSubtask(subtask2);

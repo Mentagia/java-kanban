@@ -1,5 +1,8 @@
 package ru.yandex.javacource.lyubavin.schedule.task;
 
+import ru.yandex.javacource.lyubavin.schedule.enums.TaskStatus;
+import ru.yandex.javacource.lyubavin.schedule.enums.TaskType;
+
 import java.util.ArrayList;
 
 public class Epic extends Task {
@@ -37,13 +40,8 @@ public class Epic extends Task {
     }
 
     @Override
-    public String toString() {
-        return "Epic{" +
-                "epicId=" + getId() +
-                ", epicName='" + getTaskName() + '\'' +
-                ", epicDiscr='" + getTaskDiscr() + '\'' +
-                ", epicStatus=" + getTaskStatus() +
-                ", subtaskIds=" + subtaskIds +
-                '}';
+    public TaskType getType() {
+        return TaskType.EPIC;
     }
+
 }

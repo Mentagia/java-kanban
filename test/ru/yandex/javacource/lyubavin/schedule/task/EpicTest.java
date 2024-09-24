@@ -1,6 +1,7 @@
 package ru.yandex.javacource.lyubavin.schedule.task;
 
 import org.junit.jupiter.api.Test;
+import ru.yandex.javacource.lyubavin.schedule.enums.TaskStatus;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;

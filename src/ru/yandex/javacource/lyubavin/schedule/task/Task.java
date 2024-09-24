@@ -1,5 +1,8 @@
 package ru.yandex.javacource.lyubavin.schedule.task;
 
+import ru.yandex.javacource.lyubavin.schedule.enums.TaskStatus;
+import ru.yandex.javacource.lyubavin.schedule.enums.TaskType;
+
 import java.util.Objects;
 
 public class Task {
@@ -53,6 +56,10 @@ public class Task {
         this.taskStatus = taskStatus;
     }
 
+    public TaskType getType() {
+        return TaskType.TASK;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -68,12 +75,8 @@ public class Task {
 
     @Override
     public String toString() {
-        return "Task{" +
-                "taskId=" + id +
-                ", taskName='" + taskName + '\'' +
-                ", taskDiscr='" + taskDiscr + '\'' +
-                ", taskStatus=" + taskStatus +
-                '}';
+        return String.format("%d,%s,%s,%s,%s\n",(getId()), getType(),
+                getTaskName(), getTaskStatus(), getTaskDiscr());
     }
 
 }
