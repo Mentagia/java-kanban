@@ -14,7 +14,7 @@ import java.io.IOException;
 
 
 
-public class FileBackedTaskManager extends InMemoryTaskManager{
+public class FileBackedTaskManager extends InMemoryTaskManager {
     private final String pathToFile = "taskLogs\\tasks.csv";
 
     @Override
@@ -128,7 +128,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager{
         }
     }
 
-    public void save() throws ManagerSaveException{
+    public void save() throws ManagerSaveException {
         try (FileWriter writer = new FileWriter(pathToFile)) {
             writer.write("id,type,name,status,description,epicId\n");
 
@@ -160,7 +160,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager{
                     case "TASK":
                         Task task = fromString(currentLine);
 
-                        if (task !=null) {
+                        if (task != null) {
                             taskManager.tasks.put(task.getId(), task);
                         }
 
@@ -168,7 +168,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager{
                     case "EPIC":
                         Epic epic = (Epic) fromString(currentLine);
 
-                        if (epic !=null) {
+                        if (epic != null) {
                             taskManager.epics.put(epic.getId(), epic);
                         }
 
