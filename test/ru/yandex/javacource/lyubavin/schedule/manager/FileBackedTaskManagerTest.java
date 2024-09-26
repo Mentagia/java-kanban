@@ -1,5 +1,6 @@
 package ru.yandex.javacource.lyubavin.schedule.manager;
 
+import java.io.File;
 import java.io.IOException;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -14,8 +15,6 @@ import ru.yandex.javacource.lyubavin.schedule.task.Subtask;
 import ru.yandex.javacource.lyubavin.schedule.enums.TaskStatus;
 
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class FileBackedTaskManagerTest {
@@ -24,7 +23,7 @@ public class FileBackedTaskManagerTest {
 
     @BeforeEach
     void init() throws IOException {
-        taskManager = Managers.getDefaultFileBackedTaskManager();
+        taskManager = (FileBackedTaskManager) Managers.getDefault();
     }
 
     @Test

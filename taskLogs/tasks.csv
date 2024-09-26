@@ -1,8 +1,10 @@
-id,type,name,status,description,epicId
+id,type,name,status,description,epic
 0,TASK,Прогулка,NEW,Проходить по 10000 шагов в день на протяжении недели
 1,TASK,Сон,IN_PROGRESS,Спать по 8 часов на протяжении недели
-2,EPIC,Обучиться Java,NEW,Обучиться Java на достаточном для трудоустройства уровне за последующий год
+7,TASK,new Task3,NEW,new Task3 description
+8,TASK,new Task4,IN_PROGRESS,new Task4 description
+2,EPIC,Обучиться Java,IN_PROGRESS,Обучиться Java на достаточном для трудоустройства уровне за последующий год
 3,EPIC,Научится работе с БД,NEW,Обучиться работе с БД за последующие полгода
 4,SUBTASK,Обучиться JavaCore,NEW,Изучить JavaCore за 6 месяцев,2
-5,SUBTASK,Обучиться SpringBoot,NEW,Изучить SpringBoot за 6 месяцев,2
+5,SUBTASK,Обучиться SpringBoot,IN_PROGRESS,Изучить SpringBoot за 6 месяцев,2
 6,SUBTASK,Обучиться SQL,NEW,Изучить SQL за 3 месяца,3

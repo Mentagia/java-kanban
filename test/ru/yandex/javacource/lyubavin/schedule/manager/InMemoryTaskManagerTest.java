@@ -134,7 +134,8 @@ class InMemoryTaskManagerTest {
         Task task = new Task("task ", "task description ", TaskStatus.NEW);
         int taskId = taskManager.addTask(task);
 
-        Task updatedTask = new Task(taskId, "updatedTask ", " updatedTask description ", TaskStatus.IN_PROGRESS);
+        Task updatedTask = new Task(taskId, "updatedTask ", " updatedTask description ",
+                TaskStatus.IN_PROGRESS);
         taskManager.updateTask(updatedTask);
         Task savedUpdatedTask = taskManager.getTask(taskId);
 

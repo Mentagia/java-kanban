@@ -13,7 +13,7 @@ import java.nio.file.Paths;
 public class Main {
 
     public static void main(String[] args) {
-        TaskManager taskManager = Managers.getDefaultFileBackedTaskManager();
+        TaskManager taskManager = Managers.getDefault();
 
         Task newTask1 = new Task("Прогулка",
                 "Проходить по 10000 шагов в день на протяжении недели", TaskStatus.NEW);
@@ -34,7 +34,7 @@ public class Main {
         Subtask newSubtask1 = new Subtask("Обучиться JavaCore",
                 "Изучить JavaCore за 6 месяцев", TaskStatus.NEW, idEpic1);
         Subtask newSubtask2 = new Subtask("Обучиться SpringBoot",
-                "Изучить SpringBoot за 6 месяцев", TaskStatus.NEW, idEpic1);
+                "Изучить SpringBoot за 6 месяцев", TaskStatus.IN_PROGRESS, idEpic1);
         Subtask newSubtask3 = new Subtask("Обучиться SQL",
                 "Изучить SQL за 3 месяца", TaskStatus.NEW, idEpic2);
 
@@ -46,6 +46,14 @@ public class Main {
 
         TaskManager newTaskManager =
                 FileBackedTaskManager.loadFromFile(Paths.get("taskLogs\\tasks.csv").toFile());
+
+        Task newTask3 = new Task("new Task3",
+                "new Task3 description", TaskStatus.NEW);
+        Task newTask4 = new Task("new Task4",
+                "new Task4 description", TaskStatus.IN_PROGRESS);
+
+        int idTask3 = newTaskManager.addTask(newTask3);
+        int idTask4 = newTaskManager.addTask(newTask4);
 
         printTasks(newTaskManager);
     }
