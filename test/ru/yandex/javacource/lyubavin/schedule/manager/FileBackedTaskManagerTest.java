@@ -1,6 +1,5 @@
 package ru.yandex.javacource.lyubavin.schedule.manager;
 
-import java.io.File;
 import java.io.IOException;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -51,7 +50,7 @@ public class FileBackedTaskManagerTest {
         List<Task> tasksBeforeLoad = taskManager.getAllTasks();
         List<Epic> epicsBeforeLoad = taskManager.getAllEpics();
         List<Subtask> subTasksBeforeLoad = taskManager.getAllSubtasks();
-        taskManager = FileBackedTaskManager.loadFromFile(Paths.get("taskLogs\\tasks.csv").toFile());
+        taskManager = FileBackedTaskManager.loadFromFile(Paths.get("taskLogs/tasks.csv").toFile());
         List<Task> tasksAfterLoad = taskManager.getAllTasks();
         List<Epic> epicsAfterLoad = taskManager.getAllEpics();
         List<Subtask> subTasksAfterLoad = taskManager.getAllSubtasks();
@@ -75,7 +74,7 @@ public class FileBackedTaskManagerTest {
         assertTrue(taskManager.epics.isEmpty());
         assertTrue(taskManager.subtasks.isEmpty());
 
-        taskManager = FileBackedTaskManager.loadFromFile(Paths.get("taskLogs\\tasks.csv").toFile());
+        taskManager = FileBackedTaskManager.loadFromFile(Paths.get("taskLogs/tasks.csv").toFile());
 
         assertTrue(taskManager.tasks.isEmpty());
         assertTrue(taskManager.epics.isEmpty());
