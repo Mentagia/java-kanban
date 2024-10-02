@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import ru.yandex.javacource.lyubavin.schedule.task.Task;
 import ru.yandex.javacource.lyubavin.schedule.task.Epic;
 import ru.yandex.javacource.lyubavin.schedule.task.Subtask;
-import ru.yandex.javacource.lyubavin.schedule.task.TaskStatus;
+import ru.yandex.javacource.lyubavin.schedule.enums.TaskStatus;
 
 import java.util.List;
 
