@@ -4,12 +4,16 @@ import ru.yandex.javacource.lyubavin.schedule.enums.TaskStatus;
 import ru.yandex.javacource.lyubavin.schedule.enums.TaskType;
 
 import java.util.ArrayList;
+import java.time.Duration;
+import java.time.LocalDateTime;
+
 
 public class Epic extends Task {
     private ArrayList<Integer> subtaskIds;
+    private LocalDateTime endTime;
 
     public Epic(String epicName, String epicDiscr) {
-        super(epicName, epicDiscr, TaskStatus.NEW);
+        super(epicName, epicDiscr, TaskStatus.NEW, null, Duration.ZERO);
         subtaskIds = new ArrayList<>();
     }
 
@@ -25,7 +29,6 @@ public class Epic extends Task {
 
     public ArrayList<Integer> getSubtaskIds() {
             return subtaskIds;
-
     }
 
     public void setSubtaskIds(ArrayList<Integer> subtaskIds) {
@@ -44,9 +47,22 @@ public class Epic extends Task {
         subtaskIds.clear();
     }
 
+    public void setEndTime(LocalDateTime endTime) {
+        this.endTime = endTime;
+    }
+
     @Override
     public TaskType getType() {
         return TaskType.EPIC;
+    }
+
+    @Override
+    public LocalDateTime getEndTime() {
+        if (getStartTime() != null) {
+            return endTime;
+        } else {
+            return null;
+        }
     }
 
     @Override
@@ -55,7 +71,9 @@ public class Epic extends Task {
                 "epicId=" + getId() +
                 ", epicName='" + getTaskName() + '\'' +
                 ", epicDiscr='" + getTaskDiscr() + '\'' +
-                ", epicStatus=" + getTaskStatus() +
+                ", epicStatus=" + getTaskStatus() + '\'' +
+                ", duration='" + getDuration().toMinutes()+ '\'' +
+                ", startTime='" + getStartTime()  + '\'' +
                 ", subtaskIds=" + subtaskIds +
                 '}';
     }

@@ -5,16 +5,16 @@ import ru.yandex.javacource.lyubavin.schedule.task.Subtask;
 import ru.yandex.javacource.lyubavin.schedule.task.Task;
 import ru.yandex.javacource.lyubavin.schedule.enums.TaskStatus;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.ArrayList;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.util.*;
 
 public class InMemoryTaskManager implements TaskManager {
     protected int generatedId = 0;
     protected final Map<Integer, Task> tasks = new HashMap<>();
     protected final Map<Integer, Subtask> subtasks = new HashMap<>();
     protected final Map<Integer, Epic> epics = new HashMap<>();
+    protected Set<Task> prioritizedTasks = new TreeSet<>();
     protected final HistoryManager historyManager = new InMemoryHistoryManager();
 
     @Override
@@ -170,6 +170,7 @@ public class InMemoryTaskManager implements TaskManager {
 
         epicOfSubtask.addSubtaskId(subtask.getId());
         changeEpicStatus(epicId);
+        changeEpicTime(epicId);
 
         return newId;
     }
@@ -192,6 +193,7 @@ public class InMemoryTaskManager implements TaskManager {
 
         subtasks.put(id, updatedSubtask);
         changeEpicStatus(epicId);
+        changeEpicTime(epicId);
     }
 
     @Override
@@ -255,6 +257,7 @@ public class InMemoryTaskManager implements TaskManager {
         epics.get(epicId).removeSubtaskId(id);
         subtasks.remove(id);
         changeEpicStatus(epicId);
+        changeEpicTime(epicId);
     }
 
     void changeEpicStatus(int epicId) {
@@ -280,5 +283,50 @@ public class InMemoryTaskManager implements TaskManager {
                 epicToChangeStatus.setTaskStatus(TaskStatus.IN_PROGRESS);
             }
         }
+    }
+
+    void changeEpicTime(int epicId) {
+        Epic epicToChangeTime = epics.get(epicId);
+
+        List<Subtask> epicSubtasks = getAllEpicSubtasks(epicId);
+        boolean isFirstSubtask = true;
+        LocalDateTime startTime = null;
+        LocalDateTime endTime = null;
+        long minutes = 0L;
+
+        for (Subtask subtask : epicSubtasks) {
+            if (subtask.getEndTime() != null) {
+                minutes += subtask.getDuration().toMinutes();
+
+                if (isFirstSubtask) {
+                    startTime = subtask.getStartTime();
+                    endTime = subtask.getEndTime();
+                    isFirstSubtask = false;
+                }
+
+                if (subtask.getStartTime().isBefore(startTime)) {
+                    startTime = subtask.getStartTime();
+                }
+
+                if (subtask.getEndTime().isAfter(endTime)) {
+                    endTime = subtask.getEndTime();
+                }
+            }
+        }
+
+        if (startTime != null) {
+            epicToChangeTime.setStartTime(startTime);
+            epicToChangeTime.setEndTime(endTime);
+            epicToChangeTime.setDuration(Duration.ofMinutes(minutes));
+
+        } else {
+            epicToChangeTime.setStartTime(null);
+            epicToChangeTime.setEndTime(null);
+            epicToChangeTime.setDuration(Duration.ZERO);
+        }
+    }
+
+    public List<Task> getPrioritizedTasks() {
+        return prioritizedTasks.stream().toList();
     }
 }
