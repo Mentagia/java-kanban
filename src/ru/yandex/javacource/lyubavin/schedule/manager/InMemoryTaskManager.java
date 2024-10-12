@@ -312,7 +312,7 @@ public class InMemoryTaskManager implements TaskManager {
         LocalDateTime endTime = null;
         long minutes = 0L;
 
-        if (epicSubtasks != null){
+        if (epicSubtasks != null) {
             for (Subtask subtask : epicSubtasks) {
                 if (subtask.getEndTime() != null) {
                     minutes += subtask.getDuration().toMinutes();
@@ -351,26 +351,26 @@ public class InMemoryTaskManager implements TaskManager {
         return prioritizedTasks.stream().toList();
     }
 
-    public boolean validateTask (Task task) {
-        if (task.getStartTime() == null){
+    public boolean validateTask(Task task) {
+        if (task.getStartTime() == null) {
             return true;
         } else {
             return getPrioritizedTasks().stream()
                     .filter(task1 -> task1.getEndTime().isAfter(task.getStartTime())
                     && task1.getStartTime().isBefore(task.getEndTime())
-                    || task1.getStartTime().equals(task.getEndTime ())
+                    || task1.getStartTime().equals(task.getEndTime())
                     || task1.getEndTime().equals(task.getStartTime()))
                     .collect(Collectors.toSet()).isEmpty();
         }
     }
 
-    protected void addPrioritizedTasks (Task task) {
+    protected void addPrioritizedTasks(Task task) {
         if (task.getStartTime() != null) {
             prioritizedTasks.add(task);
         }
     }
 
-    protected void updatePrioritizedTask (Task task) {
+    protected void updatePrioritizedTask(Task task) {
         if (task.getStartTime() != null) {
             getPrioritizedTasks().forEach(prioritizedTask -> {
                 if (prioritizedTask.getId() == task.getId()) {
@@ -381,7 +381,7 @@ public class InMemoryTaskManager implements TaskManager {
         }
     }
 
-    protected void removePrioritizedTask (Task task) {
+    protected void removePrioritizedTask(Task task) {
         if (task.getStartTime() != null) {
             prioritizedTasks.remove(task);
         }
