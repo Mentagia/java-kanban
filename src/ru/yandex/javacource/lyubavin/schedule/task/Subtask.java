@@ -53,7 +53,7 @@ public class Subtask extends Task {
                 ", subtaskName='" + getTaskName() + '\'' +
                 ", subtaskDiscr='" + getTaskDiscr() + '\'' +
                 ", subtaskStatus=" + getTaskStatus() + '\'' +
-                ", startTime='" + getStartTime()+ '\'' +
+                ", startTime='" + getStartTime() + '\'' +
                 ", endTime='" + getEndTime() + '\'' +
                 ", duration=" + getDuration().toMinutes() + '\'' +
                 ", epicId=" + epicId +
