@@ -11,18 +11,24 @@ public class Subtask extends Task {
     private int epicId;
 
     public Subtask(String taskName, String taskDiscr, TaskStatus taskStatus, int epicId) {
-        super(taskName, taskDiscr, taskStatus);
+        super(taskName, taskDiscr, taskStatus, null, Duration.ZERO);
         this.epicId = epicId;
     }
 
     public Subtask(int id, String taskName, String taskDiscr, TaskStatus taskStatus, int epicId) {
-        super(id, taskName, taskDiscr, taskStatus);
+        super(id, taskName, taskDiscr, taskStatus,null, Duration.ZERO);
         this.epicId = epicId;
     }
 
     public Subtask(String taskName, String taskDiscr, TaskStatus taskStatus,
                    LocalDateTime startTime, Duration duration, int epicId) {
         super(taskName, taskDiscr, taskStatus, startTime, duration);
+        this.epicId = epicId;
+    }
+
+    public Subtask(int id, String taskName, String taskDiscr, TaskStatus taskStatus,
+                   LocalDateTime startTime, Duration duration, int epicId) {
+        super(id, taskName, taskDiscr, taskStatus, startTime, duration);
         this.epicId = epicId;
     }
 
@@ -47,8 +53,9 @@ public class Subtask extends Task {
                 ", subtaskName='" + getTaskName() + '\'' +
                 ", subtaskDiscr='" + getTaskDiscr() + '\'' +
                 ", subtaskStatus=" + getTaskStatus() + '\'' +
-                ", duration='" + getDuration().toMinutes()+ '\'' +
-                ", startTime='" + getStartTime()  + '\'' +
+                ", startTime='" + getStartTime()+ '\'' +
+                ", endTime='" + getEndTime() + '\'' +
+                ", duration=" + getDuration().toMinutes() + '\'' +
                 ", epicId=" + epicId +
                 '}';
     }

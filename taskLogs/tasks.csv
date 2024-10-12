@@ -1,1 +1,10 @@
-id,type,name,status,description,epic
+id,type,name,status,description,startTime,endTime,duration,epic
+0,TASK,Прогулка,NEW,Проходить по 10000 шагов в день на протяжении недели,2024-10-12T23:00,2024-10-12T23:10,10,
+1,TASK,Сон,IN_PROGRESS,Спать по 8 часов на протяжении недели,2024-10-12T21:00,2024-10-12T22:00,60,
+7,TASK,new Task3,NEW,new Task3 description,null,null,0,
+8,TASK,new Task4,IN_PROGRESS,new Task4 description,null,null,0,
+2,EPIC,Обучиться Java,IN_PROGRESS,Обучиться Java на достаточном для трудоустройства уровне за последующий год,2024-10-12T12:00,2024-10-12T16:00,180,
+3,EPIC,Научится работе с БД,NEW,Обучиться работе с БД за последующие полгода,null,null,0,
+4,SUBTASK,Обучиться JavaCore,NEW,Изучить JavaCore за 6 месяцев,2024-10-12T12:00,2024-10-12T13:00,60,2
+5,SUBTASK,Обучиться SpringBoot,IN_PROGRESS,Изучить SpringBoot за 6 месяцев,2024-10-12T14:00,2024-10-12T16:00,120,2
+6,SUBTASK,Обучиться SQL,NEW,Изучить SQL за 3 месяца,null,null,0,3

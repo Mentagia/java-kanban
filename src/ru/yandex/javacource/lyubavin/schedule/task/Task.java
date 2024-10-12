@@ -20,6 +20,8 @@ public class Task implements Comparable<Task> {
         this.taskName = taskName;
         this.taskDiscr = taskDiscr;
         this.taskStatus = taskStatus;
+        this.startTime = null;
+        this.duration = Duration.ZERO;
     }
 
     public Task(int id, String taskName, String taskDiscr, TaskStatus taskStatus) {
@@ -27,13 +29,25 @@ public class Task implements Comparable<Task> {
         this.taskName = taskName;
         this.taskDiscr = taskDiscr;
         this.taskStatus = taskStatus;
+        this.startTime = null;
+        this.duration = Duration.ZERO;
     }
 
     public Task(String taskName, String taskDiscr, TaskStatus taskStatus,
                 LocalDateTime startTime, Duration duration) {
-        this. taskName = taskName;
-        this. taskDiscr = taskDiscr;
-        this. taskStatus = taskStatus;
+        this.taskName = taskName;
+        this.taskDiscr = taskDiscr;
+        this.taskStatus = taskStatus;
+        this.startTime = startTime;
+        this.duration = duration;
+    }
+
+    public Task(int id, String taskName, String taskDiscr, TaskStatus taskStatus,
+                LocalDateTime startTime, Duration duration) {
+        this.id = id;
+        this.taskName = taskName;
+        this.taskDiscr = taskDiscr;
+        this.taskStatus = taskStatus;
         this.startTime = startTime;
         this.duration = duration;
     }
@@ -75,6 +89,10 @@ public class Task implements Comparable<Task> {
     }
 
     public Duration getDuration() {
+        if (duration == null){
+            return Duration.ZERO;
+        }
+
         return duration;
     }
 
@@ -128,9 +146,10 @@ public class Task implements Comparable<Task> {
                 "taskId=" + id +
                 ", taskName='" + taskName + '\'' +
                 ", taskDiscr='" + taskDiscr + '\'' +
-                ", taskStatus=" + taskStatus + '\'' +
-                ", duration='" + duration.toMinutes()+ '\'' +
-                ", startTime='" + startTime  +
+                ", taskStatus=" + taskStatus + '\''  +
+                ", startTime='" + startTime + '\'' +
+                ", endTime='" + getEndTime() + '\'' +
+                ", duration=" + duration.toMinutes() +
                 '}';
     }
 

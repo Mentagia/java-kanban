@@ -13,17 +13,23 @@ public class Epic extends Task {
     private LocalDateTime endTime;
 
     public Epic(String epicName, String epicDiscr) {
-        super(epicName, epicDiscr, TaskStatus.NEW, null, Duration.ZERO);
+        super(epicName, epicDiscr, TaskStatus.NEW,null, Duration.ZERO);
         subtaskIds = new ArrayList<>();
     }
 
     public Epic(int id, String epicName, String epicDiscr) {
-        super(id, epicName, epicDiscr, TaskStatus.NEW);
+        super(id, epicName, epicDiscr, TaskStatus.NEW,null, Duration.ZERO);
         subtaskIds = new ArrayList<>();
     }
 
     public Epic(int id, String epicName, String epicDiscr, TaskStatus status) {
-        super(id, epicName, epicDiscr, status);
+        super(id, epicName, epicDiscr, status,null, Duration.ZERO);
+        subtaskIds = new ArrayList<>();
+    }
+
+    public Epic(int id, String epicName, String epicDiscr, TaskStatus status,
+                LocalDateTime startTime, Duration duration) {
+        super(id, epicName, epicDiscr, status, startTime, duration);
         subtaskIds = new ArrayList<>();
     }
 
@@ -72,8 +78,9 @@ public class Epic extends Task {
                 ", epicName='" + getTaskName() + '\'' +
                 ", epicDiscr='" + getTaskDiscr() + '\'' +
                 ", epicStatus=" + getTaskStatus() + '\'' +
-                ", duration='" + getDuration().toMinutes()+ '\'' +
-                ", startTime='" + getStartTime()  + '\'' +
+                ", startTime='" + getStartTime()+ '\'' +
+                ", endTime='" + getEndTime() + '\'' +
+                ", duration=" + getDuration().toMinutes() + '\'' +
                 ", subtaskIds=" + subtaskIds +
                 '}';
     }
