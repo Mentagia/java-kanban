@@ -165,7 +165,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         }
     }
 
-    public static FileBackedTaskManager loadFromFile (File file) throws ManagerLoadException {
+    public static FileBackedTaskManager loadFromFile(File file) throws ManagerLoadException {
         FileBackedTaskManager taskManager = new FileBackedTaskManager(file);
         int currentId = 0;
 
