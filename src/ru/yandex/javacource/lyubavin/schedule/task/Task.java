@@ -3,7 +3,6 @@ package ru.yandex.javacource.lyubavin.schedule.task;
 import ru.yandex.javacource.lyubavin.schedule.enums.TaskStatus;
 import ru.yandex.javacource.lyubavin.schedule.enums.TaskType;
 
-import java.util.Comparator;
 import java.util.Objects;
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -89,7 +88,7 @@ public class Task implements Comparable<Task> {
     }
 
     public Duration getDuration() {
-        if (duration == null){
+        if (duration == null) {
             return Duration.ZERO;
         }
 
