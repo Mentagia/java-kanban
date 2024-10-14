@@ -2,11 +2,8 @@ package ru.yandex.javacource.lyubavin.schedule.manager;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
 
+import ru.yandex.javacource.lyubavin.schedule.exceptions.TaskValidationException;
 import ru.yandex.javacource.lyubavin.schedule.task.Task;
 import ru.yandex.javacource.lyubavin.schedule.task.Epic;
 import ru.yandex.javacource.lyubavin.schedule.task.Subtask;
@@ -14,6 +11,8 @@ import ru.yandex.javacource.lyubavin.schedule.enums.TaskStatus;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class InMemoryTaskManagerTest extends AbstractTaskManagerTest<InMemoryTaskManager>{
 
@@ -260,11 +259,10 @@ class InMemoryTaskManagerTest extends AbstractTaskManagerTest<InMemoryTaskManage
         Task task1 = new Task("task 1", "task description 1", TaskStatus.NEW, time1 , duration);
         Task task2 = new Task("task 2", "task description 2", TaskStatus.NEW, time1 , duration);
 
-        taskManager.addTask(task1);
-        taskManager.addTask(task2);
-
-        assertEquals(1, taskManager.getAllTasks().size(), "Неправильная работа валидатора." +
-                "Обе задачи были добавлены.");
+        assertThrows(TaskValidationException.class, () -> {
+            taskManager.addTask(task1);
+            taskManager.addTask(task2);
+        },"Неправильная работа валидатора." + "Обе задачи были добавлены.");
     }
 
     @Test

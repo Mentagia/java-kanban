@@ -1,5 +1,6 @@
 package ru.yandex.javacource.lyubavin.schedule.manager;
 
+import ru.yandex.javacource.lyubavin.schedule.exceptions.TaskValidationException;
 import ru.yandex.javacource.lyubavin.schedule.task.Epic;
 import ru.yandex.javacource.lyubavin.schedule.task.Subtask;
 import ru.yandex.javacource.lyubavin.schedule.task.Task;
@@ -15,7 +16,7 @@ public class InMemoryTaskManager implements TaskManager {
     protected final Map<Integer, Task> tasks = new HashMap<>();
     protected final Map<Integer, Subtask> subtasks = new HashMap<>();
     protected final Map<Integer, Epic> epics = new HashMap<>();
-    protected Set<Task> prioritizedTasks = new TreeSet<>();
+    protected final Set<Task> prioritizedTasks = new TreeSet<>(Comparator.comparing(Task::getStartTime));
     protected final HistoryManager historyManager = new InMemoryHistoryManager();
 
     @Override
@@ -36,7 +37,8 @@ public class InMemoryTaskManager implements TaskManager {
             return newId;
         }
 
-        return null;
+        throw new TaskValidationException("Задача '" + task.getTaskName()
+                + "' пересекается с уже существующей задачей");
     }
 
     @Override
@@ -46,10 +48,16 @@ public class InMemoryTaskManager implements TaskManager {
 
             if (tasks.containsKey(updatedTaskId)) {
                 tasks.put(updatedTaskId, updatedTask);
+
             }
 
             updatePrioritizedTask(updatedTask);
+
+            return;
         }
+
+        throw new TaskValidationException("Задача '" + updatedTask.getTaskName()
+                + "' пересекается с уже существующей задачей");
     }
 
     @Override
@@ -95,21 +103,16 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public Integer addEpic(Epic epic) {
-        if (validateTask(epic)) {
             int newId = generatedId++;
 
             epic.setId(newId);
             epics.put(newId, epic);
 
             return newId;
-        }
-
-        return null;
     }
 
     @Override
     public void updateEpic(Epic updatedEpic) {
-        if (validateTask(updatedEpic)) {
             final Epic savedEpic = epics.get(updatedEpic.getId());
 
             if (savedEpic == null) {
@@ -119,7 +122,6 @@ public class InMemoryTaskManager implements TaskManager {
             updatedEpic.setSubtaskIds(savedEpic.getSubtaskIds());
             updatedEpic.setTaskStatus(savedEpic.getTaskStatus());
             epics.put(updatedEpic.getId(), updatedEpic);
-        }
     }
 
     @Override
@@ -191,7 +193,8 @@ public class InMemoryTaskManager implements TaskManager {
             return newId;
         }
 
-        return null;
+        throw new TaskValidationException("Задача '" + subtask.getTaskName()
+                + "' пересекается с уже существующей задачей");
     }
 
     @Override
@@ -215,7 +218,12 @@ public class InMemoryTaskManager implements TaskManager {
             updatePrioritizedTask(updatedSubtask);
             changeEpicStatus(epicId);
             changeEpicTime(epicId);
+
+            return;
         }
+
+        throw new TaskValidationException("Задача '" + updatedSubtask.getTaskName()
+                + "' пересекается с уже существующей задачей");
     }
 
     @Override
