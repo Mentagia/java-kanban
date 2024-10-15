@@ -7,7 +7,7 @@ import ru.yandex.javacource.lyubavin.schedule.task.Task;
 import java.util.List;
 
 public interface TaskManager {
-    int addTask(Task task);
+    Integer addTask(Task task);
 
     void updateTask(Task updatedTask);
 
@@ -19,7 +19,7 @@ public interface TaskManager {
 
     void removeTask(int id);
 
-    int addEpic(Epic epic);
+    Integer addEpic(Epic epic);
 
     void updateEpic(Epic updatedEpic);
 
@@ -46,4 +46,6 @@ public interface TaskManager {
     void removeSubtask(int id);
 
     List<Task> getHistoryList();
+
+    List<Task> getPrioritizedTasks();
 }
