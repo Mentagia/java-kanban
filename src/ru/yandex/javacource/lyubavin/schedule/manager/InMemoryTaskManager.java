@@ -12,7 +12,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class InMemoryTaskManager implements TaskManager {
-    protected int generatedId = 0;
+    protected int generatedId = 1;
     protected final Map<Integer, Task> tasks = new HashMap<>();
     protected final Map<Integer, Subtask> subtasks = new HashMap<>();
     protected final Map<Integer, Epic> epics = new HashMap<>();
@@ -119,6 +119,9 @@ public class InMemoryTaskManager implements TaskManager {
                 return;
             }
 
+            updatedEpic.setStartTime(savedEpic.getStartTime());
+            updatedEpic.setDuration(savedEpic.getDuration());
+            updatedEpic.setEndTime(savedEpic.getEndTime());
             updatedEpic.setSubtaskIds(savedEpic.getSubtaskIds());
             updatedEpic.setTaskStatus(savedEpic.getTaskStatus());
             epics.put(updatedEpic.getId(), updatedEpic);

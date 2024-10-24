@@ -33,6 +33,12 @@ public class Epic extends Task {
         subtaskIds = new ArrayList<>();
     }
 
+    public Epic(String epicName, String epicDiscr, TaskStatus status,
+                LocalDateTime startTime, Duration duration) {
+        super(epicName, epicDiscr, status, startTime, duration);
+        subtaskIds = new ArrayList<>();
+    }
+
     public ArrayList<Integer> getSubtaskIds() {
             return subtaskIds;
     }
@@ -80,7 +86,7 @@ public class Epic extends Task {
                 ", epicStatus=" + getTaskStatus() + '\'' +
                 ", startTime='" + getStartTime() + '\'' +
                 ", endTime='" + getEndTime() + '\'' +
-                ", duration=" + getDuration().toMinutes() + '\'' +
+                ", duration='" + getDuration().toMinutes() + '\'' +
                 ", subtaskIds=" + subtaskIds +
                 '}';
     }
