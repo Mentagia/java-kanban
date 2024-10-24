@@ -6,7 +6,6 @@ import com.sun.net.httpserver.HttpServer;
 import ru.yandex.javacource.lyubavin.schedule.adapters.DurationAdapter;
 import ru.yandex.javacource.lyubavin.schedule.adapters.LocalDateTimeAdapter;
 import ru.yandex.javacource.lyubavin.schedule.handlers.*;
-import ru.yandex.javacource.lyubavin.schedule.manager.HistoryManager;
 import ru.yandex.javacource.lyubavin.schedule.manager.Managers;
 import ru.yandex.javacource.lyubavin.schedule.manager.TaskManager;
 
