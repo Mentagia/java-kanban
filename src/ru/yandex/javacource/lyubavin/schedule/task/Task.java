@@ -148,7 +148,7 @@ public class Task implements Comparable<Task> {
                 ", taskStatus=" + taskStatus + '\''  +
                 ", startTime='" + startTime + '\'' +
                 ", endTime='" + getEndTime() + '\'' +
-                ", duration=" + duration.toMinutes() +
+                ", duration='" + duration.toMinutes() +
                 '}';
     }
 

@@ -243,12 +243,12 @@ class InMemoryTaskManagerTest extends AbstractTaskManagerTest<InMemoryTaskManage
 
         ArrayList<Integer> checkList = new ArrayList<>();
 
-        checkList.add(1);
-        checkList.add(2);
+        checkList.add(subtaskId1);
+        checkList.add(subtaskId2);
 
         assertEquals(checkList, epic1.getSubtaskIds(), "ID не совпадают.");
 
-        checkList.remove(Integer.valueOf(2));
+        checkList.remove(Integer.valueOf(subtaskId2));
         epic1.removeSubtaskId(subtaskId2);
 
         assertEquals(checkList, epic1.getSubtaskIds(), "ID не совпадают.");
